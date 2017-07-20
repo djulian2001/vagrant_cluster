@@ -1,0 +1,31 @@
+---
+configs:
+  use: 'dev'              # i think this is the default config behavior namespace match...?
+  # stage:
+  #   public_ip: 'x.x.x.x'  # interesting can push to xen, or a kvm?
+  #   private_ip: 'y.y.y.y'
+  #   # more variables
+  dev:
+    vm_box_type: 'virtualbox'
+    arg_user_name: 'vagrant'
+    arg_user_pass: 'vagrant'
+    arg_user_uuid: 999999999
+    arg_user_desc: "bootstrap_ansible, from bootstrap repo project"
+    box: 'centos/7'
+    box_version: '1702.01'
+    node:
+      vagrant_name: 'node_%{hook}'
+      # vagrant_box: 'centos/7'
+      hostname: 'compute.node.%{hook}'
+      private_ip: '192.168.34.6%{hook}'
+      vbox_name: 'rc_bootstrap_centos7_node_%{hook}'
+      provision_label: 'compute node_%{hook}'
+      provision_path: 'remote_provision.sh'
+    manage:
+      vagrant_name: 'manage_node'
+      # vagrant_box: 'centos/7'
+      hostname: 'manage.node'
+      private_ip: '192.168.34.60'
+      vbox_name: 'rc_bootstrap_centos7_manage'
+      provision_label: 'manager node'
+      provision_path: 'manage_provision.sh'
